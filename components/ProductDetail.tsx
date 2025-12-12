@@ -98,10 +98,10 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const sizes = ['XS', 'S', 'M', 'L', 'XL']
 
   return (
-    <div className="max-w-[1920px] mx-auto container-fluid px-4 sm:px-6">
+    <div className="max-w-[1920px] mx-auto container-fluid px-4 sm:px-6 animate-fade-in">
       <Link
         href="/products"
-        className="inline-flex items-center text-fluid-xs sm:text-fluid-sm text-charcoal/50 hover:text-charcoal mb-[clamp(2rem,5vw,4rem)] transition-colors duration-500 group font-light tracking-wider uppercase"
+        className="inline-flex items-center text-fluid-xs sm:text-fluid-sm text-charcoal/50 hover:text-charcoal mb-[clamp(2rem,5vw,4rem)] transition-all duration-500 group font-light tracking-wider uppercase hover:translate-x-[-4px]"
       >
         <FiArrowLeft className="mr-2 sm:mr-3 w-3 h-3 group-hover:-translate-x-1 transition-transform duration-500" />
         Back to Collection
@@ -109,8 +109,8 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(2rem,5vw,8rem)]">
         {/* Product Display */}
-        <div>
-          <div className="relative aspect-[3/4] mb-4 sm:mb-6 bg-beige-100 flex items-center justify-center rounded-2xl overflow-hidden">
+        <div className="animate-fade-in-left">
+          <div className="relative aspect-[3/4] mb-4 sm:mb-6 bg-beige-100 flex items-center justify-center rounded-2xl overflow-hidden hover:scale-[1.01] transition-transform duration-500">
             <div className="text-center" style={{ padding: 'clamp(2rem, 5vw, 4rem)' }}>
               <div className="mx-auto mb-4 sm:mb-8 border border-charcoal/10 flex items-center justify-center rounded-xl" style={{ width: 'clamp(4rem, 10vw, 7rem)', height: 'clamp(4rem, 10vw, 7rem)' }}>
                 <span className="text-fluid-3xl sm:text-fluid-4xl font-display text-charcoal/15 font-light">A</span>
@@ -141,7 +141,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         </div>
 
         {/* Product Info */}
-        <div className="pt-4 sm:pt-8">
+        <div className="pt-4 sm:pt-8 animate-fade-in-right">
           <div className="mb-4 sm:mb-6">
             <span className="text-fluid-xs text-charcoal/45 uppercase tracking-[0.2em] font-light">
               {product.category}

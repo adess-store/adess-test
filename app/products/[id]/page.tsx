@@ -18,7 +18,9 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   
   return (
     <div className="pt-32 pb-24 px-8 lg:px-16 bg-gradient-to-b from-stone via-beige-50 to-stone min-h-screen">
-      <ProductDetail product={product} />
+      <div className="animate-fade-in-scale">
+        <ProductDetail product={product} />
+      </div>
     </div>
   )
 }

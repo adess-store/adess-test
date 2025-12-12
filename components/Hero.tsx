@@ -44,10 +44,10 @@ export default function Hero() {
         </div>
 
         {/* CTA Button */}
-        <div className="animate-fade-in px-4" style={{ animationDelay: '0.6s' }}>
+        <div className="animate-fade-in-up px-4" style={{ animationDelay: '0.6s' }}>
           <Link
             href="/products"
-            className="inline-flex items-center gap-[clamp(0.5rem,0.8vw,0.5rem)] px-[clamp(1.5rem,3vw,2.5rem)] py-[clamp(1rem,1.8vw,1rem)] bg-charcoal text-white hover:bg-charcoal/90 hover:scale-105 active:scale-95 transition-all duration-300 font-light text-fluid-sm sm:text-fluid-base tracking-wider uppercase border border-charcoal rounded-[20px] group shadow-lg hover:shadow-xl"
+            className="inline-flex items-center gap-[clamp(0.5rem,0.8vw,0.5rem)] px-[clamp(1.5rem,3vw,2.5rem)] py-[clamp(1rem,1.8vw,1rem)] bg-charcoal text-white hover:bg-charcoal/90 hover:scale-105 active:scale-95 transition-all duration-300 font-light text-fluid-sm sm:text-fluid-base tracking-wider uppercase border border-charcoal rounded-[20px] group shadow-lg hover:shadow-xl hover:-translate-y-0.5"
           >
             <span className="inline-block group-hover:translate-x-1 transition-transform duration-300">Explore Collection</span>
             <svg className="w-[clamp(1rem,1.2vw,1rem)] h-[clamp(1rem,1.2vw,1rem)] group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">

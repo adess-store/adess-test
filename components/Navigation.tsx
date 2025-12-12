@@ -10,25 +10,25 @@ export default function Navigation() {
   const { itemCount } = useCart()
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-charcoal/8 shadow-sm" style={{ backgroundColor: '#FFF6E9' }}>
+    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-charcoal/8 shadow-sm animate-fade-in" style={{ backgroundColor: '#FFF6E9' }}>
       <div className="max-w-[1920px] mx-auto container-fluid">
         <div className="flex items-center justify-between" style={{ height: 'clamp(3.5rem, 8vw, 6rem)' }}>
           {/* Logo */}
-          <Link href="/" className="group transition-transform duration-300 hover:scale-105">
+          <Link href="/" className="group transition-all duration-300 hover:scale-105 animate-fade-in-left">
             <h1 className="text-fluid-2xl font-seasons font-semibold text-charcoal tracking-wide">Adess</h1>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-fluid-lg">
-            <Link href="/" className="text-fluid-sm text-charcoal/75 hover:text-charcoal transition-all duration-500 font-semibold tracking-wider uppercase relative group">
+            <Link href="/" className="text-fluid-sm text-charcoal/75 hover:text-charcoal transition-all duration-500 font-semibold tracking-wider uppercase relative group animate-fade-in delay-200">
               Home
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-charcoal/30 transition-all duration-700 group-hover:w-full"></span>
             </Link>
-            <Link href="/products" className="text-fluid-sm text-charcoal/75 hover:text-charcoal transition-all duration-500 font-semibold tracking-wider uppercase relative group">
+            <Link href="/products" className="text-fluid-sm text-charcoal/75 hover:text-charcoal transition-all duration-500 font-semibold tracking-wider uppercase relative group animate-fade-in delay-400">
               Browse
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-charcoal/30 transition-all duration-700 group-hover:w-full"></span>
             </Link>
-            <Link href="/products" className="text-fluid-sm text-charcoal/75 hover:text-charcoal transition-all duration-500 font-semibold tracking-wider uppercase relative group">
+            <Link href="/products" className="text-fluid-sm text-charcoal/75 hover:text-charcoal transition-all duration-500 font-semibold tracking-wider uppercase relative group animate-fade-in delay-600">
               Collection
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-charcoal/30 transition-all duration-700 group-hover:w-full"></span>
             </Link>
@@ -62,25 +62,25 @@ export default function Navigation() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-charcoal/8 backdrop-blur-md" style={{ backgroundColor: '#FFF6E9' }}>
+        <div className="md:hidden border-t border-charcoal/8 backdrop-blur-md animate-slide-in" style={{ backgroundColor: '#FFF6E9' }}>
           <div className="container-fluid py-[clamp(1.5rem,3vw,2rem)] space-y-[clamp(1.25rem,2.5vw,1.5rem)]">
             <Link
               href="/"
-              className="block text-fluid-sm text-charcoal/75 hover:text-charcoal transition-colors font-semibold tracking-wider uppercase py-2"
+              className="block text-fluid-sm text-charcoal/75 hover:text-charcoal transition-all duration-300 font-semibold tracking-wider uppercase py-2 animate-fade-in-left delay-200 hover:translate-x-1"
               onClick={() => setIsMenuOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/products"
-              className="block text-fluid-sm text-charcoal/75 hover:text-charcoal transition-colors font-semibold tracking-wider uppercase py-2"
+              className="block text-fluid-sm text-charcoal/75 hover:text-charcoal transition-all duration-300 font-semibold tracking-wider uppercase py-2 animate-fade-in-left delay-400 hover:translate-x-1"
               onClick={() => setIsMenuOpen(false)}
             >
               Browse
             </Link>
             <Link
               href="/products"
-              className="block text-fluid-sm text-charcoal/75 hover:text-charcoal transition-colors font-semibold tracking-wider uppercase py-2"
+              className="block text-fluid-sm text-charcoal/75 hover:text-charcoal transition-all duration-300 font-semibold tracking-wider uppercase py-2 animate-fade-in-left delay-600 hover:translate-x-1"
               onClick={() => setIsMenuOpen(false)}
             >
               Collection
