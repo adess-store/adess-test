@@ -30,7 +30,7 @@ export default function CartPage() {
 
         {hasItems ? (
           <div className="space-y-6">
-            <div className="bg-white/70 backdrop-blur-md rounded-3xl border border-charcoal/10 p-6 sm:p-8 shadow-sm space-y-4 transform transition-all duration-500 ease-out hover:shadow-xl hover:-translate-y-0.5">
+            <div className="bg-beige-100/80 backdrop-blur-md rounded-3xl border border-charcoal/10 p-6 sm:p-8 shadow-sm space-y-4 transform transition-all duration-500 ease-out hover:shadow-xl hover:-translate-y-0.5">
               {items.map((item, index) => (
                 <div
                   key={`${item.id}-${item.size ?? 'nosize'}`}

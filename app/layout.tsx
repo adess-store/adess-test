@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="bg-dark text-cream">
         <CartProvider>
           <Navigation />
           <main className="min-h-screen">

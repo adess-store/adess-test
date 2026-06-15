@@ -7,7 +7,6 @@ export interface Product {
   image: string
   featured?: boolean
 }
-
 // Mock product data with high-quality clothing images
 export const products: Product[] = [
   {

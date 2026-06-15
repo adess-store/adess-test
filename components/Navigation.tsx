@@ -10,7 +10,7 @@ export default function Navigation() {
   const { itemCount } = useCart()
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-charcoal/8 shadow-sm animate-fade-in" style={{ backgroundColor: '#FFF6E9' }}>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-dark/95 backdrop-blur-xl border-b border-cream/10 shadow-sm animate-fade-in">
       <div className="max-w-[1920px] mx-auto container-fluid">
         <div className="flex items-center justify-between" style={{ height: 'clamp(3.5rem, 8vw, 6rem)' }}>
           {/* Logo */}
@@ -62,7 +62,7 @@ export default function Navigation() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-charcoal/8 backdrop-blur-md animate-slide-in" style={{ backgroundColor: '#FFF6E9' }}>
+        <div className="md:hidden border-t border-cream/10 bg-dark backdrop-blur-md animate-slide-in">
           <div className="container-fluid py-[clamp(1.5rem,3vw,2rem)] space-y-[clamp(1.25rem,2.5vw,1.5rem)]">
             <Link
               href="/"

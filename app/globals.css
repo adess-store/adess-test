@@ -14,12 +14,14 @@
 }
 
 :root {
-  --beige-light: #faf8f5;
-  --beige: #f5f1ea;
-  --beige-medium: #ebe3d5;
-  --beige-dark: #d4c4a8;
-  --beige-darker: #b8a082;
-  --charcoal: #2c2c2c;
+  --dark: #262626;
+  --cream: #fae3bf;
+  --beige-light: #333333;
+  --beige: #2e2e2e;
+  --beige-medium: #3a3a3a;
+  --beige-dark: #424242;
+  --beige-darker: #555555;
+  --charcoal: #fae3bf;
 }
 
 * {
@@ -30,8 +32,8 @@
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  color: var(--charcoal);
-  background-color: #fafafa;
+  color: var(--cream);
+  background-color: var(--dark);
   line-height: 1.6;
   font-weight: 300;
   letter-spacing: 0.01em;
@@ -336,9 +338,9 @@ html {
 
 /* Modern glass effect */
 .glass {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(250, 227, 191, 0.08);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(250, 227, 191, 0.15);
 }
 
 /* Custom scrollbar */
@@ -347,7 +349,7 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--beige);
+  background: var(--dark);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -356,6 +358,6 @@ html {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #d4c4a8;
+  background: var(--cream);
 }
 

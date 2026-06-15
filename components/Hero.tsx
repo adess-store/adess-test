@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function Hero() {
   return (
-    <section className="relative flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#FFFFFF', minHeight: 'clamp(85vh, 100vh, 100vh)' }}>
+    <section className="relative flex items-center justify-center overflow-hidden bg-dark" style={{ minHeight: 'clamp(85vh, 100vh, 100vh)' }}>
       {/* Sophisticated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full">
@@ -12,7 +12,7 @@ export default function Hero() {
         </div>
         {/* Subtle grid pattern */}
         <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: 'linear-gradient(to right, #1a1a1a 1px, transparent 1px), linear-gradient(to bottom, #1a1a1a 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(to right, #fae3bf 1px, transparent 1px), linear-gradient(to bottom, #fae3bf 1px, transparent 1px)',
           backgroundSize: 'clamp(2rem, 5vw, 3.125rem) clamp(2rem, 5vw, 3.125rem)'
         }}></div>
       </div>
@@ -47,7 +47,7 @@ export default function Hero() {
         <div className="animate-fade-in-up px-4" style={{ animationDelay: '0.6s' }}>
           <Link
             href="/products"
-            className="inline-flex items-center gap-[clamp(0.5rem,0.8vw,0.5rem)] px-[clamp(1.5rem,3vw,2.5rem)] py-[clamp(1rem,1.8vw,1rem)] bg-charcoal text-white hover:bg-charcoal/90 hover:scale-105 active:scale-95 transition-all duration-300 font-light text-fluid-sm sm:text-fluid-base tracking-wider uppercase border border-charcoal rounded-[20px] group shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            className="inline-flex items-center gap-[clamp(0.5rem,0.8vw,0.5rem)] px-[clamp(1.5rem,3vw,2.5rem)] py-[clamp(1rem,1.8vw,1rem)] bg-cream text-dark hover:bg-cream/90 hover:scale-105 active:scale-95 transition-all duration-300 font-light text-fluid-sm sm:text-fluid-base tracking-wider uppercase border border-cream rounded-[20px] group shadow-lg hover:shadow-xl hover:-translate-y-0.5"
           >
             <span className="inline-block group-hover:translate-x-1 transition-transform duration-300">Explore Collection</span>
             <svg className="w-[clamp(1rem,1.2vw,1rem)] h-[clamp(1rem,1.2vw,1rem)] group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
