@@ -2,9 +2,12 @@
 
 import { useCart } from '@/components/CartProvider'
 import Link from 'next/link'
+import { useLanguage } from '@/components/LanguageProvider'
+import { getLocalizedProductName } from '@/lib/i18n/products'
 
 export default function CartPage() {
   const { items, total, clearCart, removeItem } = useCart()
+  const { t, locale } = useLanguage()
 
   const hasItems = items.length > 0
 
@@ -14,17 +17,17 @@ export default function CartPage() {
         <div className="mb-[clamp(2rem,5vw,3rem)] flex items-center justify-between gap-4">
           <div className="transition-transform duration-500 ease-out">
             <h1 className="text-fluid-4xl md:text-fluid-5xl font-display font-light text-charcoal tracking-tight mb-2">
-              Your Cart
+              {t('cart.title')}
             </h1>
             <p className="text-fluid-sm text-charcoal/60">
-              {hasItems ? 'Review your selected pieces before checkout.' : 'Your cart is currently empty.'}
+              {hasItems ? t('cart.hasItems') : t('cart.empty')}
             </p>
           </div>
           <Link
             href="/products"
             className="text-fluid-xs sm:text-fluid-sm text-charcoal/70 hover:text-charcoal transition-colors uppercase tracking-wider border border-charcoal/15 rounded-[20px] px-4 py-2 bg-stone hover:bg-beige-100"
           >
-            Continue Shopping
+            {t('cart.continueShopping')}
           </Link>
         </div>
 
@@ -38,14 +41,16 @@ export default function CartPage() {
                   style={{ animationDelay: `${0.1 * (index + 1)}s` }}
                 >
                   <div>
-                    <h2 className="text-fluid-base font-display text-charcoal mb-1">{item.name}</h2>
+                    <h2 className="text-fluid-base font-display text-charcoal mb-1">
+                      {getLocalizedProductName(item.id, item.name, locale)}
+                    </h2>
                     {item.size && (
                       <p className="text-fluid-xs text-charcoal/60 uppercase tracking-[0.15em] mb-1">
-                        Size: {item.size}
+                        {t('cart.size')} {item.size}
                       </p>
                     )}
                     <p className="text-fluid-xs text-charcoal/55">
-                      Qty: {item.quantity}
+                      {t('cart.qty')} {item.quantity}
                     </p>
                   </div>
                   <div className="text-right space-y-2">
@@ -56,7 +61,7 @@ export default function CartPage() {
                       className="text-fluid-xs text-charcoal/60 underline underline-offset-4 hover:text-charcoal transition-colors hover:translate-x-0.5 transform"
                       onClick={() => removeItem(item.id, item.size ?? null)}
                     >
-                      Remove
+                      {t('cart.remove')}
                     </button>
                   </div>
                 </div>
@@ -66,7 +71,7 @@ export default function CartPage() {
             <div className="flex items-center justify-between mt-4 animate-fade-in" style={{ animationDelay: '0.2s' }}>
               <div>
                 <p className="text-fluid-xs text-charcoal/55 uppercase tracking-[0.18em] mb-1">
-                  Estimated Total
+                  {t('cart.estimatedTotal')}
                 </p>
                 <p className="text-fluid-2xl font-display text-charcoal">
                   ${total.toFixed(2)}
@@ -77,13 +82,13 @@ export default function CartPage() {
                   className="text-fluid-xs sm:text-fluid-sm tracking-wider uppercase border border-charcoal/15 rounded-[20px] px-4 py-3 bg-stone text-charcoal/75 hover:bg-beige-100 hover:text-charcoal transition-all duration-300 hover:-translate-y-0.5"
                   onClick={clearCart}
                 >
-                  Clear Cart
+                  {t('cart.clearCart')}
                 </button>
                 <button
                   className="text-fluid-xs sm:text-fluid-sm tracking-wider uppercase border border-charcoal rounded-[20px] px-6 py-3 bg-charcoal text-stone opacity-70 cursor-not-allowed hover:opacity-80 transition-opacity duration-300"
                   type="button"
                 >
-                  Checkout (Demo Only)
+                  {t('cart.checkout')}
                 </button>
               </div>
             </div>
@@ -91,13 +96,13 @@ export default function CartPage() {
         ) : (
           <div className="mt-[clamp(3rem,8vw,5rem)] text-center animate-fade-in" style={{ animationDuration: '0.7s' }}>
             <p className="text-fluid-sm text-charcoal/60 mb-4">
-              When you add items to your cart, they will appear here.
+              {t('cart.emptyHint')}
             </p>
             <Link
               href="/products"
               className="inline-flex items-center gap-2 px-6 py-3 bg-charcoal text-stone rounded-[20px] text-fluid-xs tracking-wider uppercase border border-charcoal hover:bg-charcoal/90 hover:scale-[1.04] active:scale-[0.98] transition-all duration-300 shadow-lg hover:shadow-xl"
             >
-              Browse Collection
+              {t('cart.browseCollection')}
             </Link>
           </div>
         )}
@@ -105,5 +110,3 @@ export default function CartPage() {
     </div>
   )
 }
-
-

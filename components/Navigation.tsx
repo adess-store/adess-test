@@ -4,10 +4,13 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { FiMenu, FiX, FiShoppingBag, FiSearch } from 'react-icons/fi'
 import { useCart } from '@/components/CartProvider'
+import { useLanguage } from '@/components/LanguageProvider'
+import LanguageToggle from '@/components/LanguageToggle'
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { itemCount } = useCart()
+  const { t } = useLanguage()
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-dark/95 backdrop-blur-xl border-b border-cream/10 shadow-sm animate-fade-in">
@@ -21,22 +24,27 @@ export default function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-fluid-lg">
             <Link href="/" className="text-fluid-sm text-charcoal/75 hover:text-charcoal transition-all duration-500 font-semibold tracking-wider uppercase relative group animate-fade-in delay-200">
-              Home
+              {t('nav.home')}
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-charcoal/30 transition-all duration-700 group-hover:w-full"></span>
             </Link>
             <Link href="/products" className="text-fluid-sm text-charcoal/75 hover:text-charcoal transition-all duration-500 font-semibold tracking-wider uppercase relative group animate-fade-in delay-400">
-              Browse
+              {t('nav.browse')}
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-charcoal/30 transition-all duration-700 group-hover:w-full"></span>
             </Link>
-            <Link href="/products" className="text-fluid-sm text-charcoal/75 hover:text-charcoal transition-all duration-500 font-semibold tracking-wider uppercase relative group animate-fade-in delay-600">
-              Collection
+            <Link href="/support" className="text-fluid-sm text-charcoal/75 hover:text-charcoal transition-all duration-500 font-semibold tracking-wider uppercase relative group animate-fade-in delay-600">
+              {t('nav.support')}
+              <span className="absolute -bottom-1 left-0 w-0 h-px bg-charcoal/30 transition-all duration-700 group-hover:w-full"></span>
+            </Link>
+            <Link href="/review" className="text-fluid-sm text-charcoal/75 hover:text-charcoal transition-all duration-500 font-semibold tracking-wider uppercase relative group animate-fade-in delay-800">
+              {t('nav.review')}
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-charcoal/30 transition-all duration-700 group-hover:w-full"></span>
             </Link>
           </div>
 
           {/* Right side icons */}
           <div className="flex items-center gap-fluid-md">
-            <button className="text-charcoal/65 hover:text-charcoal transition-all duration-300 hover:scale-110 p-[clamp(0.5rem,1vw,0.75rem)] rounded-full hover:bg-charcoal/8">
+            <LanguageToggle />
+            <button className="text-charcoal/65 hover:text-charcoal transition-all duration-300 hover:scale-110 p-[clamp(0.5rem,1vw,0.75rem)] rounded-full hover:bg-charcoal/8" aria-label={t('nav.search')}>
               <FiSearch className="w-[clamp(0.875rem,1.5vw,1rem)] h-[clamp(0.875rem,1.5vw,1rem)]" />
             </button>
             <Link
@@ -69,21 +77,28 @@ export default function Navigation() {
               className="block text-fluid-sm text-charcoal/75 hover:text-charcoal transition-all duration-300 font-semibold tracking-wider uppercase py-2 animate-fade-in-left delay-200 hover:translate-x-1"
               onClick={() => setIsMenuOpen(false)}
             >
-              Home
+              {t('nav.home')}
             </Link>
             <Link
               href="/products"
               className="block text-fluid-sm text-charcoal/75 hover:text-charcoal transition-all duration-300 font-semibold tracking-wider uppercase py-2 animate-fade-in-left delay-400 hover:translate-x-1"
               onClick={() => setIsMenuOpen(false)}
             >
-              Browse
+              {t('nav.browse')}
             </Link>
             <Link
-              href="/products"
+              href="/support"
               className="block text-fluid-sm text-charcoal/75 hover:text-charcoal transition-all duration-300 font-semibold tracking-wider uppercase py-2 animate-fade-in-left delay-600 hover:translate-x-1"
               onClick={() => setIsMenuOpen(false)}
             >
-              Collection
+              {t('nav.support')}
+            </Link>
+            <Link
+              href="/review"
+              className="block text-fluid-sm text-charcoal/75 hover:text-charcoal transition-all duration-300 font-semibold tracking-wider uppercase py-2 animate-fade-in-left delay-800 hover:translate-x-1"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {t('nav.review')}
             </Link>
           </div>
         </div>

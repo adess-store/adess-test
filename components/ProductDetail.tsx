@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { Product } from '@/lib/products'
 import { FiArrowLeft, FiHeart, FiShare2 } from 'react-icons/fi'
 import { useCart } from '@/components/CartProvider'
+import { useLanguage } from '@/components/LanguageProvider'
+import { getLocalizedProduct } from '@/lib/i18n/products'
 
 interface ProductDetailProps {
   product: Product
@@ -14,6 +16,8 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const [selectedImage, setSelectedImage] = useState(0)
   const [selectedSize, setSelectedSize] = useState<string | null>(null)
   const { addItem } = useCart()
+  const { t, locale, isArabic } = useLanguage()
+  const localized = getLocalizedProduct(product, locale)
   const [isSharing, setIsSharing] = useState(false)
   const [shareMessage, setShareMessage] = useState<string | null>(null)
 
@@ -21,7 +25,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     if (typeof window === 'undefined' || isSharing) return
 
     const shareUrl = window.location.href
-    const shareText = `${product.name} · $${product.price}`
+    const shareText = `${localized.name} · $${product.price}`
 
     try {
       setIsSharing(true)
@@ -30,11 +34,11 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       // Try Web Share API first (works on mobile and some desktop browsers)
       if (navigator.share && navigator.canShare && navigator.canShare({ title: product.name, text: shareText, url: shareUrl })) {
         await navigator.share({
-          title: product.name,
+          title: localized.name,
           text: shareText,
           url: shareUrl,
         })
-        setShareMessage('Shared successfully!')
+        setShareMessage(t('product.sharedSuccess'))
         setTimeout(() => setShareMessage(null), 3000)
         return
       }
@@ -43,7 +47,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         try {
           await navigator.clipboard.writeText(shareUrl)
-          setShareMessage('Link copied to clipboard!')
+          setShareMessage(t('product.linkCopied'))
           setTimeout(() => setShareMessage(null), 3000)
         } catch (clipboardError) {
           // Clipboard failed, show URL in a way user can copy manually
@@ -79,16 +83,16 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     try {
       const successful = document.execCommand('copy')
       if (successful) {
-        setShareMessage('Link copied to clipboard!')
+        setShareMessage(t('product.linkCopied'))
         setTimeout(() => setShareMessage(null), 3000)
       } else {
         // Last resort: show the URL
-        setShareMessage(`Share this link: ${url}`)
+        setShareMessage(`${t('product.shareLink')} ${url}`)
         setTimeout(() => setShareMessage(null), 5000)
       }
     } catch (err) {
       // Show the URL as last resort
-      setShareMessage(`Share this link: ${url}`)
+      setShareMessage(`${t('product.shareLink')} ${url}`)
       setTimeout(() => setShareMessage(null), 5000)
     } finally {
       document.body.removeChild(textarea)
@@ -101,10 +105,10 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     <div className="max-w-[1920px] mx-auto container-fluid px-4 sm:px-6 animate-fade-in">
       <Link
         href="/products"
-        className="inline-flex items-center text-fluid-xs sm:text-fluid-sm text-charcoal/50 hover:text-charcoal mb-[clamp(2rem,5vw,4rem)] transition-all duration-500 group font-light tracking-wider uppercase hover:translate-x-[-4px]"
+        className={`inline-flex items-center text-fluid-xs sm:text-fluid-sm text-charcoal/50 hover:text-charcoal mb-[clamp(2rem,5vw,4rem)] transition-all duration-500 group font-light tracking-wider uppercase ${isArabic ? 'hover:translate-x-1' : 'hover:translate-x-[-4px]'}`}
       >
-        <FiArrowLeft className="mr-2 sm:mr-3 w-3 h-3 group-hover:-translate-x-1 transition-transform duration-500" />
-        Back to Collection
+        <FiArrowLeft className={`w-3 h-3 transition-transform duration-500 ${isArabic ? 'ml-2 sm:ml-3 rotate-180 group-hover:translate-x-1' : 'mr-2 sm:mr-3 group-hover:-translate-x-1'}`} />
+        {t('product.backToCollection')}
       </Link>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(2rem,5vw,8rem)]">
@@ -116,7 +120,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 <span className="text-fluid-3xl sm:text-fluid-4xl font-display text-charcoal/15 font-light">A</span>
               </div>
               <div className="text-charcoal/25 text-fluid-xs uppercase tracking-[0.2em] font-light">
-                {product.category}
+                {localized.categoryLabel}
               </div>
             </div>
           </div>
@@ -148,19 +152,19 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             </span>
           </div>
           <h1 className="text-fluid-3xl sm:text-fluid-4xl md:text-fluid-5xl font-display font-light text-charcoal mb-4 sm:mb-8 tracking-tight leading-tight">
-            {product.name}
+            {localized.name}
           </h1>
           <p className="text-fluid-xl sm:text-fluid-2xl font-display font-light text-charcoal mb-6 sm:mb-12 tracking-wide">
             ${product.price}
           </p>
           <p className="text-fluid-sm text-charcoal/60 mb-8 sm:mb-12 leading-relaxed font-light max-w-lg">
-            {product.description}
+            {localized.description}
           </p>
 
           {/* Size Selection */}
           <div className="mb-8 sm:mb-12">
             <label className="block text-fluid-xs text-charcoal/55 uppercase tracking-wider font-light mb-3 sm:mb-4">
-              Size
+              {t('product.size')}
             </label>
             <div className="flex gap-2 sm:gap-3 flex-wrap">
               {sizes.map((size) => (
@@ -190,12 +194,12 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 addItem(product, { size: selectedSize })
               }}
             >
-              {selectedSize ? 'Add to Cart' : 'Select Size to Add to Cart'}
+              {selectedSize ? t('product.addToCart') : t('product.selectSize')}
             </button>
             <div className="flex gap-3 sm:gap-4">
               <button className="group flex-1 py-3 sm:py-4 border border-charcoal/12 bg-stone text-charcoal/65 hover:bg-beige-100 hover:border-charcoal/25 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 font-light text-fluid-xs tracking-wider uppercase flex items-center justify-center gap-2 rounded-[20px] backdrop-blur-sm">
                 <FiHeart className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-300 group-hover:scale-110" />
-                Save
+                {t('product.save')}
               </button>
               <button
                 className="group flex-1 py-3 sm:py-4 border border-charcoal/12 bg-stone text-charcoal/65 hover:bg-beige-100 hover:border-charcoal/25 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 font-light text-fluid-xs tracking-wider uppercase flex items-center justify-center gap-2 rounded-[20px] backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed"
@@ -203,7 +207,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 disabled={isSharing}
               >
                 <FiShare2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-300 group-hover:scale-110" />
-                {isSharing ? 'Sharing…' : 'Share'}
+                {isSharing ? t('product.sharing') : t('product.share')}
               </button>
             </div>
             {shareMessage && (
@@ -218,13 +222,13 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           {/* Product Details */}
           <div className="border-t border-charcoal/8 pt-8 sm:pt-12">
             <h3 className="text-fluid-xs sm:text-fluid-sm font-display font-light text-charcoal mb-4 sm:mb-6 uppercase tracking-wider">
-              Details
+              {t('product.details')}
             </h3>
             <ul className="space-y-3 sm:space-y-4 text-fluid-xs sm:text-fluid-sm text-charcoal/60 font-light leading-relaxed">
-              <li>Premium quality materials</li>
-              <li>Classic design with modern comfort</li>
-              <li>Care instructions included</li>
-              <li>Free shipping on orders over $100</li>
+              <li>{t('product.detail1')}</li>
+              <li>{t('product.detail2')}</li>
+              <li>{t('product.detail3')}</li>
+              <li>{t('product.detail4')}</li>
             </ul>
           </div>
         </div>

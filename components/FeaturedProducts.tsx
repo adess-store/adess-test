@@ -1,15 +1,24 @@
+'use client'
+
 import { getFeaturedProducts } from '@/lib/products'
 import ProductCard from './ProductCard'
+import { useLanguage } from '@/components/LanguageProvider'
 
 export default function FeaturedProducts() {
   const featuredProducts = getFeaturedProducts()
+  const { t } = useLanguage()
 
   return (
     <section className="bg-gradient-to-b from-stone via-beige-50 to-stone" style={{ paddingTop: 'clamp(4rem, 10vw, 8rem)', paddingBottom: 'clamp(4rem, 10vw, 8rem)' }}>
       <div className="max-w-[1920px] mx-auto container-fluid">
         <div className="text-center mb-[clamp(3rem, 8vw, 6rem)] animate-fade-in-up">
           <h2 className="text-fluid-5xl md:text-fluid-6xl lg:text-fluid-7xl font-display font-light text-charcoal mb-[clamp(1.5rem, 4vw, 2rem)] tracking-tight">
-            Featured <span className="bg-gradient-to-r from-charcoal via-charcoal/85 to-charcoal bg-clip-text text-transparent animate-pulse">Collection</span>
+            {t('featured.our')}{' '}
+            {t('featured.collection') && (
+              <span className="bg-gradient-to-r from-charcoal via-charcoal/85 to-charcoal bg-clip-text text-transparent animate-pulse">
+                {t('featured.collection')}
+              </span>
+            )}
           </h2>
         </div>
         
@@ -24,4 +33,3 @@ export default function FeaturedProducts() {
     </section>
   )
 }
-

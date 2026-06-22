@@ -3,6 +3,7 @@ import './globals.css'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import { CartProvider } from '@/components/CartProvider'
+import { LanguageProvider } from '@/components/LanguageProvider'
 
 export const metadata: Metadata = {
   title: 'Adess - Classic & Casual Clothing',
@@ -20,13 +21,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-dark text-cream">
-        <CartProvider>
-          <Navigation />
-          <main className="min-h-screen">
-            {children}
-          </main>
-          <Footer />
-        </CartProvider>
+        <LanguageProvider>
+          <CartProvider>
+            <Navigation />
+            <main className="min-h-screen">
+              {children}
+            </main>
+            <Footer />
+          </CartProvider>
+        </LanguageProvider>
       </body>
     </html>
   )
