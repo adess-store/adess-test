@@ -23,15 +23,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Enable GitHub Pages
+      - name: Verify GitHub Pages is enabled
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           if gh api "repos/${{ github.repository }}/pages" >/dev/null 2>&1; then
-            echo "GitHub Pages is already enabled."
+            echo "GitHub Pages is enabled."
           else
-            echo "Enabling GitHub Pages with GitHub Actions as the source..."
-            gh api --method POST "repos/${{ github.repository }}/pages" -f build_type=workflow
+            echo "::error title=GitHub Pages not enabled::Enable Pages manually, then re-run this workflow."
+            echo ""
+            echo "GitHub Actions cannot enable Pages automatically (API returns 403)."
+            echo "Do this once as a repository admin:"
+            echo "  1. Open https://github.com/${{ github.repository }}/settings/pages"
+            echo "  2. Under Build and deployment, set Source to GitHub Actions"
+            echo "  3. Settings → Actions → General → Workflow permissions → Read and write"
+            echo "  4. Re-run this workflow"
+            exit 1
           fi
 
       - name: Setup Pages
