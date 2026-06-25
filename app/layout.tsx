@@ -8,9 +8,6 @@ import { LanguageProvider } from '@/components/LanguageProvider'
 export const metadata: Metadata = {
   title: 'Adess - Classic & Casual Clothing',
   description: 'Timeless elegance meets modern comfort. Discover our curated collection of classic and casual clothing.',
-  icons: {
-    icon: '/favicon.png',
-  },
 }
 
 export default function RootLayout({

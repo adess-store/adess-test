@@ -32,6 +32,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# root favicon (copied to app/ and public/)
-favicon.png
+# root favicon source file (copied to app/ and public/)
+/favicon.png
 
